@@ -1,0 +1,46 @@
+class Solution { //C++
+public:
+    int removeElement(vector<int>& nums, int val) {
+        if(nums.size() == 0)
+            return 0;
+        int k = 0; // num of elements not equal to val
+        for(int i = 0; i < nums.size(); i++){ 
+            if(nums[i] == val){
+                nums.erase(nums.begin() + i); //can erase
+                i--; 
+            } else {
+                k++; 
+            }
+        }
+        return k;
+    }
+};
+
+class Solution { //Java
+    public int removeElement(int[] nums, int val) {
+        if(nums.length == 0){
+            return 0;
+        }
+        int k = 0;
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] != val){
+                nums[k] = nums[i]; //can move to back
+                k++;
+            }
+        }
+        return k;
+    }
+}
+
+class Solution(object): //Python
+    def removeElement(self, nums, val):
+        if len(nums) == 0:
+            return 0
+        k = 0
+        for i in range(len(nums)):
+            if nums[i] == val:
+                nums.pop(i)
+            else:
+                k+=1
+                i+=1
+        return k
