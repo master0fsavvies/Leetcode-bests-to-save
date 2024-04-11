@@ -1,0 +1,47 @@
+class Solution { //Java
+    public int removeDuplicates(int[] nums) {
+        if(nums.length < 3){
+            return nums.length;
+        }
+        int index = 2;
+        for(int i = 2; i < nums.length; i++) {
+            if(nums[i] != nums[index - 2]){
+                nums[index] = nums[i];
+                index++;
+            }
+        }
+        return index;
+    }
+}
+
+class Solution(object): //Python
+    def removeDuplicates(self, nums):
+        left = 0
+        right = 0
+        while right < len(nums):
+            count = 1
+            while right + 1 < len(nums) and nums[right] == nums[right + 1]:
+                right += 1
+                count += 1
+            for i in range(min(2, count)):
+                nums[left] = nums[right]
+                left +=1
+            right += 1
+        return left
+
+class Solution { //C++
+public:
+    int removeDuplicates(vector<int>& nums) {
+        if(nums.size() < 3){
+            return nums.size();
+        }
+        int index = 2;
+        for(int i = 2; i < nums.size(); i++){
+            if(nums[index - 2] != nums[i]){
+                nums[index] = nums[i];
+                index += 1;
+            }
+        }
+        return index;
+    }
+};
