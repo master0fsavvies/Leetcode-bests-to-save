@@ -1,0 +1,41 @@
+class Solution { //Java - Moore Voting Algorithm
+    public int majorityElement(int[] nums) {
+        int majorityElement = nums[0];
+        int majorityCount = 0;
+        for(int i : nums){
+            if(majorityCount == 0){
+                majorityElement = i;
+            }
+            if(i == majorityElement){
+                majorityCount++;
+            }
+            else{
+                majorityCount--;
+            }
+        }
+        return majorityElement;
+    }
+}
+
+class Solution { //C++ - with sort, answer is always at the middle
+public:
+    int majorityElement(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        return nums[n/2];
+    }
+};
+
+class Solution(object): //python - hashmap
+    def majorityElement(self, nums):
+        n = len(nums) // 2
+        m = defaultdict(int)
+
+        for num in nums:
+            m[num] += 1
+        
+        for key, value in m.items():
+            if value > n:
+                return key
+        
+        return 0
