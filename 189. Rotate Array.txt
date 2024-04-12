@@ -1,0 +1,37 @@
+class Solution { //Java - Reverse the whole list, then one side, then the other, around k
+    public void rotate(int[] nums, int k) {
+        if(k == nums.length){
+            return;
+        }
+        k = k % nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+    }
+    public void reverse(int[] nums, int startPosition, int endPosition){
+        while(startPosition < endPosition){
+            int temp = nums[startPosition];
+            nums[startPosition] = nums[endPosition];
+            nums[endPosition] = temp;
+            startPosition++;
+            endPosition--;
+        }
+    }
+}
+
+class Solution(object): //Python - actual rotation
+    def rotate(self, nums, k):
+        k = k % len(nums)
+        numsCopy = nums[:]
+        for i in range(len(nums)):
+            nums[(i + k) % len(nums)] = numsCopy[i]
+
+class Solution { //C++ - built in rotation
+public:
+    void rotate(vector<int>& nums, int k) {
+        k = k % nums.size();
+        reverse(nums.begin(), nums.end());
+        reverse(nums.begin(), nums.begin() + k);
+        reverse(nums.begin() + k, nums.end());
+    }
+};
