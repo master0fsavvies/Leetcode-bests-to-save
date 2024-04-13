@@ -1,0 +1,52 @@
+class Solution { //Java - My attempt c: its super slow haha
+    public int maxProfit(int[] prices) {
+        if(prices.length <= 1){
+            return 0;
+        }
+        int day = 0;
+        int currentBest = 0;
+        while(day < prices.length){
+            for(int i = day; i < prices.length; i++){
+                if(prices[day] < prices[i]){
+                    if((prices[i] - prices[day]) > currentBest){
+                        currentBest = prices[i] - prices[day];
+                    }
+                }
+            }
+            day++;
+        }
+        return currentBest;
+    }
+}
+
+class Solution { //C++ better, O(n) time, O(1) space
+public:
+    int maxProfit(vector<int>& prices) {
+        int left = 0;
+        int right = 1;
+        int maxP = 0;
+        int profit = 0;
+        while(right < prices.size()){
+            if(prices[left] < prices[right]){
+                profit = prices[right] - prices[left];
+                maxP = max(maxP, profit);
+            }
+            else{
+                left = right;
+            }
+            right++;
+        }
+        return maxP;
+    }
+};
+
+class Solution(object): //python
+    def maxProfit(self, prices):
+        buy = prices[0]
+        profit = 0
+        for i in range(1, len(prices)):
+            if prices[i] < buy:
+                buy = prices[i]
+            elif prices[i] - buy > profit:
+                profit = prices[i] - buy
+        return profit
