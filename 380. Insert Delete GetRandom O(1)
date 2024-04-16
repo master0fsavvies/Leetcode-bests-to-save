@@ -1,0 +1,108 @@
+class RandomizedSet(object): //Python - hashSet with corresponding array, O(1) time, O(n) space
+
+    def __init__(self):
+        self.numMap = {}
+        self.numList = []
+
+    def insert(self, val):
+        result = val not in self.numMap
+        if result:
+            self.numMap[val] = len(self.numList)
+            self.numList.append(val)
+        return result
+
+    def remove(self, val):
+        result = val in self.numMap
+        if result:
+            index = self.numMap[val]
+            lastVal = self.numList[-1]
+            self.numList[index] = lastVal
+            self.numList.pop()
+            self.numMap[lastVal] = index
+            del self.numMap[val]
+        return result
+
+    def getRandom(self):
+        return random.choice(self.numList)
+
+
+
+
+
+
+
+class RandomizedSet { //Java
+    private ArrayList<Integer> list;
+    private Map<Integer, Integer> map;
+    public RandomizedSet() {
+        list = new ArrayList<>();
+        map = new HashMap<>();
+    }
+    
+    public boolean insert(int val) {
+        boolean result =  !map.containsKey(val);
+        if (result){
+            list.add(val);
+            map.put(val, list.size() - 1);
+        }
+        return result;
+    }
+    
+    public boolean remove(int val) {
+        boolean result = map.containsKey(val);
+        if(result){
+            int index = map.get(val);
+            list.set(index, list.get(list.size() - 1));
+            map.put(list.get(index), index);
+            list.remove(list.size() - 1);
+            map.remove(val);
+        }
+        return result;
+    }
+    
+    public int getRandom() {
+        Random rand = new Random();
+        return list.get(rand.nextInt(list.size()));
+    }
+}
+
+
+
+
+
+
+
+class RandomizedSet { //C++
+    vector<int> list;
+    unordered_map<int, int> map;
+public:
+    RandomizedSet() {
+        
+    }
+    
+    bool insert(int val) {
+        bool result = !(map.find(val) != map.end());
+        if(result){
+            list.push_back(val);
+            map[val] = list.size() - 1;
+        }
+        return result;
+    }
+    
+    bool remove(int val) {
+        bool result = map.find(val) != map.end();
+        if(result){
+            auto it = map.find(val);
+            list[it->second] = list.back();
+            list.pop_back();
+            map[list[it->second]] = it->second;
+            map.erase(val);
+        }
+        return result;
+    }
+    
+    int getRandom() {
+        return list[rand()%list.size()];
+    }
+};
+
