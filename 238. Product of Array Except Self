@@ -1,0 +1,16 @@
+class Solution { //Java - my solution, its slow :c
+    public int[] productExceptSelf(int[] nums) {
+        int total = 1;
+        int[] newArray = new int[nums.length];
+        for(int i = 0; i < nums.length; i++){
+            for(int j = 0; j < nums.length; j++){
+                if(i != j){
+                    total = total * nums[j];
+                }
+            }
+            newArray[i] = total;
+            total = 1;
+        }
+        return newArray;
+    }
+}
