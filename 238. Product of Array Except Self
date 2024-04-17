@@ -1,4 +1,4 @@
-class Solution { //Java - my solution, its slow :c
+class Solution { //Java - my solution, its slow :c O(n^2)
     public int[] productExceptSelf(int[] nums) {
         int total = 1;
         int[] newArray = new int[nums.length];
@@ -14,3 +14,36 @@ class Solution { //Java - my solution, its slow :c
         return newArray;
     }
 }
+
+class Solution(object): //python
+    def productExceptSelf(self, nums):
+        res = [1] * (len(nums))
+
+        prefix = 1
+        for i in range(len(nums)):
+            res[i] = prefix
+            prefix *= nums[i]
+        postfix = 1
+        for i in range(len(nums) - 1, -1, -1):
+            res[i] *= postfix
+            postfix *= nums[i]
+        return res
+
+class Solution { //C++ product of all then divide each by itself, runs into problems with zeroes.
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n = nums.size();
+        int ans[n];
+        int product = 1;
+
+        for(int i = 0; i < n; i++){
+            product *= nums[i];
+        }
+
+        for(int j = 0; j < n; j++){
+            ans[j] = product / nums[j];
+        }
+
+        return ans;
+    }
+};
