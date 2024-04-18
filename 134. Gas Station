@@ -1,0 +1,60 @@
+class Solution(object): //Python O(n) time O(1) space
+    def canCompleteCircuit(self, gas, cost):
+        if sum(gas) < sum(cost):
+            return -1
+        total = 0
+        result = 0
+        for i in range(len(gas)):
+            total += gas[i] - cost[i]
+
+            if total < 0:
+                total = 0
+                result = i + 1
+        return result
+
+class Solution { //Java
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        if(sum(gas) < sum(cost)){
+            return -1;
+        }
+        int total = 0;
+        int result = 0;
+        for(int i = 0; i < gas.length; i++){
+            total += gas[i] - cost[i];
+            if(total < 0){
+                total = 0;
+                result = i + 1;
+            }
+        }
+        return result;
+    }
+    private int sum(int[] arr){
+        int sum = 0;
+        for(int num : arr){
+            sum += num;
+        }
+        return sum;
+    }
+}
+
+class Solution { //C++
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        if(sum(gas) < sum(cost)){
+            return -1;
+        }
+        int total = 0;
+        int result = 0;
+        for(int i = 0; i < gas.size(); i++){
+            total += gas[i] - cost[i];
+            if(total < 0){
+                total = 0;
+                result = i + 1;
+            }
+        }
+        return result;
+    }
+    int sum(vector<int> & arr){
+        return std::accumulate(arr.begin(), arr.end(), 0);
+    }
+};
