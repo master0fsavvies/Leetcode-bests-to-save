@@ -1,0 +1,70 @@
+class Solution(object): //python O(n) time O(1) space
+    def trap(self, height):
+        if not height: return 0
+        left, right = 0, len(height) - 1
+        leftMax, rightMax = height[left], height[right]
+        result = 0
+
+        while left < right:
+            if leftMax < rightMax:
+                left += 1
+                leftMax = max(leftMax, height[left])
+                result += leftMax - height[left]
+            else:
+                right -= 1
+                rightMax = max(rightMax, height[right])
+                result += rightMax - height[right]
+        return result
+
+class Solution {//Java
+    public int trap(int[] height) {
+        if(height.length == 0)
+            return 0;
+        int left = 0;
+        int right = height.length - 1;
+        int leftMax = height[left];
+        int rightMax = height[right];
+        int result = 0;
+
+        while(left < right){
+            if(leftMax < rightMax){
+                left += 1;
+                leftMax = Math.max(leftMax, height[left]);
+                result += leftMax - height[left];
+            }
+            else{
+                right -= 1;
+                rightMax = Math.max(rightMax, height[right]);
+                result += rightMax - height[right];
+            }
+        }
+        return result;
+    }
+}
+
+class Solution {//C++
+public:
+    int trap(vector<int>& height) {
+        if(height.size() == 0)
+            return 0;
+        int left = 0;
+        int right = height.size() - 1;
+        int leftMax = height[left];
+        int rightMax = height[right];
+        int result = 0;
+
+        while(left < right){
+            if(leftMax < rightMax){
+                left+= 1;
+                leftMax = max(leftMax, height[left]);
+                result += leftMax - height[left];
+            }
+            else{
+                right -= 1;
+                rightMax = max(rightMax, height[right]);
+                result += rightMax - height[right];
+            }
+        }
+        return result;
+    }
+};
