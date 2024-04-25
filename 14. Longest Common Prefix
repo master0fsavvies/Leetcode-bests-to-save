@@ -1,0 +1,43 @@
+class Solution(object): //Python
+    def longestCommonPrefix(self, strs):
+        result = ""
+
+        for i in range(len(strs[0])):
+            for j in strs:
+                if i == len(j) or j[i] != strs[0][i]:
+                    return result
+            result += strs[0][i]
+        return result
+
+class Solution(object): //Python, using .startswith()
+    def longestCommonPrefix(self, strs):
+        pre = strs[0]
+
+        for i in strs:
+            while not i.startswith(pre):
+                pre = pre[:-1]
+        return pre
+
+class Solution(object): //Python, max and min
+    def longestCommonPrefix(self, strs):
+        # this will be an answer
+        pref = ''        
+        # find min and max words among strs
+        minWord = min(strs)
+        maxWord = max(strs)
+
+        # for iteration
+        i = 0
+        N = min(len(minWord), len(maxWord))
+        
+        while i < N:
+            # if chars are equal
+            if minWord[i] == maxWord[i]:
+                # add this char to the answer
+                pref += minWord[i]
+            else:
+                # if not, break
+                break
+            i += 1
+
+        return pref
