@@ -1,1 +1,41 @@
+class Solution(object): //python
+    def reverseWords(self, s):
+        return " ".join(reversed(s.split()))
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution { //C++ wrong answer, holding, O(1) space O(n) time
+public:
+    string reverseWords(string s) {
+        int left = 0;
+        int right = 0;
+        int index = 0;
+        int n = s.size();
+        while (index < n) {
+            while (s[index] != ' ' && index < n){
+                s[right++] = s[index++];
+            }
+            if (left < right){
+                reverse(s.begin() + left, s.begin() + right);
+                if (right == n) break;
+                s[right++] = ' ';
+                left = right;
+            }
+            ++index;
+        }
+        if(right > 0 && s[right - 1] == ' ') --right;
+        s.resize(right);
+        return s;
+    }
+};
