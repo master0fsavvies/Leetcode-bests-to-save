@@ -1,0 +1,62 @@
+class Solution {//Java
+    public String convert(String s, int numRows) {
+        char[] c = s.toCharArray();
+        int len = c.length;
+        StringBuffer[] sb = new StringBuffer[numRows];
+        for(int i = 0; i < sb.length; i++){
+            sb[i] = new StringBuffer();
+        }
+        int i = 0;
+        while(i < len){
+            for(int j = 0; j < numRows && i < len; j++){
+                sb[j].append(c[i++]);
+            }
+            for(int k = numRows-2; k >= 1 && i < len; k--){
+                sb[k].append(c[i++]);
+            }
+        }
+        for(int index = 1; index < sb.length; index++){
+            sb[0].append(sb[index]);
+        }
+        return sb[0].toString();
+    }
+}
+
+class Solution(object): //Python
+    def convert(self, s, numRows):
+        if numRows == 1 or numRows >= len(s):
+            return s
+        rows = [''] * numRows
+        index = 0
+        step = 1
+
+        for i in s:
+            rows[index] += i
+            if index == 0:
+                step = 1
+            elif index == numRows - 1:
+                step = -1
+            index += step
+
+        return ''.join(rows)
+
+class Solution {//C++
+public:
+    string convert(string s, int numRows) {
+        if( numRows==1 ) return s;
+        vector<string> res(numRows);
+        int row=0;
+        int increase=-1;
+        for(int i=0; i<s.size(); ++i){
+            // every time at turning point, we change the increase direction
+            if(i%(numRows-1)==0) increase *= -1;
+            res[row].push_back(s[i]);
+            row += increase;
+        }
+        string ret;
+        for(const auto& str:res){
+            ret += str;
+        }
+        return ret;
+    }
+};
