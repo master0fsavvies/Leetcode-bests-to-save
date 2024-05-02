@@ -1,0 +1,72 @@
+/**
+ * @param {string[]} words
+ * @param {number} maxWidth
+ * @return {string[]}
+ */
+var fullJustify = function(words, maxWidth) {//Javascript - Code Modulo based - O(n) time O(n + m) n words m average length
+    let result = [];
+    let current = [];
+    let num_of_letters = 0;
+    for(let word of words){
+        if(word.length + current.length + num_of_letters > maxWidth){
+            for(let i = 0; i < maxWidth - num_of_letters; i++){
+                current[i % (current.length - 1 || 1)] += ' ';
+            }
+            result.push(current.join(''));
+            current = [];
+            num_of_letters = 0;
+        }
+        current.push(word);
+        num_of_letters += word.length;
+    }
+    let lastLine = current.join(' ');
+    while(lastLine.length < maxWidth) lastLine += ' ';
+    result.push(lastLine);
+
+    return result;
+};
+
+/**
+ * @param {string[]} words
+ * @param {number} maxWidth
+ * @return {string[]}
+ */
+var fullJustify = function(words, maxWidth) { //Javascript - gap based
+    let result = [];
+    let currentWords = [];
+    let currentLength = 0;
+
+    for(let word of words){
+        if(currentLength + word.length + currentWords.length > maxWidth){
+            let totalSpaces = maxWidth - currentLength;
+            let gaps = currentWords.length - 1;
+            if(gaps === 0){
+                result.push(currentWords[0] + ' '.repeat(totalSpaces));
+            } else {
+                let spacePerGap = Math.floor(totalSpaces / gaps);
+                let extraSpaces = totalSpaces % gaps;
+                let line = '';
+                for(let i = 0; i < currentWords.length; i++){
+                    line += currentWords[i];
+                    if(i < gaps){
+                        line += ' '.repeat(spacePerGap);
+                        if(i < extraSpaces){
+                            line += ' ';
+                        }
+                    }
+                }
+                result.push(line);
+            }
+            currentWords = [];
+            currentLength = 0;
+        }
+        currentWords.push(word);
+        currentLength += word.length;
+    }
+    let lastLine = currentWords.join(' ');
+    while(lastLine.length < maxWidth){
+        lastLine += ' ';
+    }
+    result.push(lastLine);
+    return result;
+};
