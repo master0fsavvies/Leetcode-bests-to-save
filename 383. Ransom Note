@@ -1,0 +1,25 @@
+/**
+ * @param {string} ransomNote
+ * @param {string} magazine
+ * @return {boolean}
+ */
+var canConstruct = function(ransomNote, magazine) {
+    let hashMap = new Map();
+    for(let i = 0; i < magazine.length; i++){
+        let current = magazine[i];
+        !hashMap.has(current) ? hashMap.set(current, 1) : hashMap.set(current, hashMap.get(current) + 1);
+    }
+    for(let j = 0; j < ransomNote.length; j++){
+        let current = ransomNote[j];
+        if(!hashMap.has(current)){
+            return false;
+        }
+        if(hashMap.get(current) === 1){
+            hashMap.delete(current);
+        }
+        else{
+            hashMap.set(current, hashMap.get(current) - 1);
+        }
+    }
+    return true;
+};
