@@ -1,0 +1,20 @@
+var wordPattern = function(pattern, s) {
+    let words = s.split(' ');
+    if (pattern.length !== words.length) return false;
+    let keyMap = new Map();
+    let valMap = new Map();
+
+    for (let i = 0; i < pattern.length; i++) {
+        let key = pattern[i];
+        let value = words[i];
+
+        if (keyMap.has(key) || valMap.has(value)) {
+            if (keyMap.get(key) !== value) return false;
+            if (valMap.get(value) !== key) return false;
+        } else {
+            keyMap.set(key, value);
+            valMap.set(value, key);
+        }
+    }
+    return true;
+};
