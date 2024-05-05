@@ -1,0 +1,33 @@
+var longestConsecutive = function(nums) { //sort, O(nlogn) time O(1) space
+    nums.sort((a, b) => a - b);
+    let count = 1;
+    let maximum = 0;
+    if(nums.length === 0) return 0;
+    for(let i = 0; i < nums.length; i++){
+        if(nums[i] !== nums[i - 1]){
+            if(nums[i] === nums[i - 1] + 1){
+                count++;
+            } else{
+                maximum = Math.max(maximum, count);
+                count = 1;
+            }
+        }
+    }
+    return Math.max(maximum, count);
+};
+
+var longestConsecutive = function(nums) {//hashset O(n) time and space
+    const set=new Set(nums)
+    var len=0
+    for(let i=0;i<nums.length;i++){
+        if(set.has(nums[i]-1)) continue;
+        let j=1
+        while(true){
+            if(!set.has(nums[i]+j)) break;
+            j++;
+        }
+        len=Math.max(j,len)
+        if(len>=(nums.length/2)) break;
+    }
+    return len;
+};
