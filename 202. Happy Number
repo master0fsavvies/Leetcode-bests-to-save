@@ -1,0 +1,18 @@
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isHappy = function(n) {
+    let current = n
+    let seen = {};
+    while(current !== 1 && !seen[current]){
+        let digs = current.toString().split('').map(Number);
+        seen[current] = true;
+        current = 0;
+        for(let i = 0; i < digs.length; i++){
+            current += Math.pow(digs[i], 2);
+        }
+        
+    }
+    return current === 1
+};
