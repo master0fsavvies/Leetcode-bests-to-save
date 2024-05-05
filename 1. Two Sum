@@ -1,0 +1,11 @@
+var twoSum = function(nums, target) {
+    let map = new Map();
+    for(let left = 0; left < nums.length; left++){
+        let difference = target - nums[left];
+        if(map.has(difference)){
+            return [map.get(difference), left];
+        }
+        if(!map.has(nums[left])) map.set(nums[left], left);
+    }
+    return;
+};
