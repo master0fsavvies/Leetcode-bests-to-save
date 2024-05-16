@@ -1,0 +1,23 @@
+/**
+ * @param {number[][]} intervals
+ * @param {number[]} newInterval
+ * @return {number[][]}
+ */
+var insert = function(intervals, newInterval) {
+    let merged = [];
+    let i = 0;
+    while(i < intervals.length && intervals[i][1] < newInterval[0]){//loop through intervals, when new's left is less than right
+        merged.push(intervals[i]); //push all that are less than interval
+        i++;
+    }
+    while(i < intervals.length && intervals[i][0] <= newInterval[1]){//continue loop, when new's left is inside the inserted interval
+        newInterval = [Math.min(newInterval[0], intervals[i][0]), Math.max(newInterval[1], intervals[i][1])];
+        i++;
+    }
+    merged.push(newInterval);//add the rest
+    while(i < intervals.length){
+        merged.push(intervals[i]);
+        i++;
+    }
+    return merged;
+};
