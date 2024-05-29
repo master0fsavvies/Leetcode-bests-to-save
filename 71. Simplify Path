@@ -1,0 +1,70 @@
+class Solution(object): //Python O(n)
+    def simplifyPath(self, path):
+        stack = []
+        current = ""
+        for character in path + "/":
+            if character == "/":
+                if current == "..":
+                    if stack: stack.pop()
+                elif current != "" and current != ".":
+                    stack.append(current)
+                current = ""
+            else:
+                current += character
+        return "/" + "/".join(stack)
+
+class Solution {//Java
+    public String simplifyPath(String path) {
+        Stack<String> stack = new Stack<>();
+        String[] directories = path.split("/");
+        String current = "";
+        for(String dir : directories){
+            if(dir.equals(".") || dir.isEmpty()){
+                current = "";
+            } else if (dir.equals("..")){
+                if (!stack.isEmpty()) stack.pop();
+            }
+            else stack.push(dir);
+        }
+        return "/" + String.join("/", stack);
+    }
+}
+
+class Solution {//C++
+public:
+    string simplifyPath(string path) {
+        stack<string> stack;
+        string result;
+        for(int i = 0; i < path.size(); i++){
+            if(path[i] == '/') continue;
+            string temp;
+            while(i < path.size() && path[i] != '/'){
+                temp += path[i++];
+            }
+            if(temp == ".") continue;
+            else if(temp == ".."){
+                if(!stack.empty()) stack.pop();
+            }
+            else stack.push(temp);
+        }
+        while(!stack.empty()){
+            result = "/" + stack.top() + result;
+            stack.pop();
+        }
+        if(result.size() == 0) return "/";
+        return result;
+    }
+};
+
+var simplifyPath = function(path) {//JavaScript
+    let stack = [];
+    let directories = path.split("/");
+    for(let dir of directories){
+        if(dir === "." || !dir) continue;
+        else if(dir === ".."){
+            if(stack.length > 0) stack.pop();
+        }
+        else stack.push(dir);
+    }
+    return "/" + stack.join("/");
+};
