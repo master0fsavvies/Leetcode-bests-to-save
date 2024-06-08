@@ -1,0 +1,90 @@
+class Solution(object)://Python
+    def evalRPN(self, tokens):
+        stack = []
+        for c in tokens:
+            if c == "+":
+                stack.append(stack.pop() + stack.pop())
+            elif c == "-":
+                a, b = stack.pop(), stack.pop()
+                stack.append(b - a)
+            elif c == "*":
+                stack.append(stack.pop() * stack.pop())
+            elif c == "/":
+                a, b = stack.pop(), stack.pop()
+                stack.append(int(float(b) / a))
+            else:
+                stack.append(int(c))
+        return stack[0]
+
+class Solution {//Java
+    public int evalRPN(String[] tokens) {
+        int a, b;
+        Stack<Integer> stack = new Stack<Integer>();
+        for(int i = 0; i < tokens.length; i++){
+            if(tokens[i].equals("+")) stack.add(stack.pop() + stack.pop());
+            else if(tokens[i].equals("-")){
+                a = stack.pop();
+                b = stack.pop();
+                stack.add(b - a);
+            }
+            else if(tokens[i].equals("*")) stack.add(stack.pop() * stack.pop());
+            else if(tokens[i].equals("/")){
+                a = stack.pop();
+                b = stack.pop();
+                stack.add(b / a);
+            }
+            else stack.add(Integer.parseInt(tokens[i]));
+        }
+        return stack.pop();
+    }
+}
+
+class Solution {//C++
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int> stack;
+        int a;
+        int b;
+        for(int i = 0; i < tokens.size(); i++){
+            if(tokens[i] == "+") {
+                a = stack.top(); stack.pop();
+                b = stack.top(); stack.pop();
+                stack.push(b + a);}
+            else if(tokens[i] == "-") {
+                a = stack.top(); stack.pop();
+                b = stack.top(); stack.pop();
+                stack.push(b - a);}
+            else if(tokens[i] == "*") {
+                a = stack.top(); stack.pop();
+                b = stack.top(); stack.pop();
+                stack.push(b * a);}
+            else if(tokens[i] == "/") {
+                a = stack.top(); stack.pop();
+                b = stack.top(); stack.pop();
+                stack.push(b / a);}
+            else stack.push(stoi(tokens[i]));
+        }
+        return stack.top();
+    }
+};
+
+
+var evalRPN = function(tokens) {//JavaScript
+    let stack = [];
+    for(let token of tokens){
+        if(token === '+') stack.push(stack.pop() + stack.pop());
+        else if(token === '-'){
+            let a = stack.pop();
+            let b = stack.pop();
+            stack.push(b - a);
+        }
+        else if(token === '*') stack.push(stack.pop() * stack.pop());
+        else if(token === '/'){
+            let a = stack.pop();
+            let b = stack.pop();
+            stack.push(Math.trunc(b / a));
+        }
+        else stack.push(parseInt(token));
+    }
+    return stack.pop();
+};
