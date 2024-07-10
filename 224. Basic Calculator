@@ -1,0 +1,141 @@
+class Solution { //Java
+    public int calculate(String s) {
+        int result = 0;
+        int number = 0;
+        int sign = 1;
+        Stack<Integer> stack = new Stack<Integer>();
+        for(int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            if(Character.isDigit(c)){
+                number = number * 10 + (int)(c - '0');
+            }
+            else if(c == '+'){
+                result += sign * number;
+                number = 0;
+                sign = 1;
+            }
+            else if (c == '-'){
+                result += sign * number;
+                number = 0;
+                sign = -1;
+            }
+            else if(c == '('){
+                stack.push(result);
+                stack.push(sign);
+                sign = 1;
+                result = 0;
+            }
+            else if(c == ')'){
+                result += sign * number;
+                number = 0;
+                result *= stack.pop();
+                result += stack.pop();
+            }
+        }
+        if(number != 0) result += sign * number;
+        return result;
+    }
+}
+
+class Solution(object): //Python
+    def calculate(self, s):
+        current = 0
+        result = 0
+        sign = 1
+        stack = []
+        for char in s:
+            if char.isdigit():
+                current = current * 10 + int(char)
+            elif char in ['+', '-']:
+                result += sign * current
+                sign = 1 if char == '+' else -1
+                current = 0
+            elif char == "(":
+                stack.append(result)
+                stack.append(sign)
+                sign = 1
+                result = 0
+            elif char == ")":
+                result += sign * current
+                result *= stack.pop()
+                result += stack.pop()
+                current = 0
+        return result + sign * current
+
+class Solution {
+public:
+    int calculate(string s) { //c++
+        long total = 0; //NOTE had to change to long because there were large numbers
+        long sign = 1;
+        long number = 0;
+        stack <long> stack;
+        for(int i = 0; i < s.size(); i++){
+            char c = s[i];
+            if(isdigit(c)){
+                number = number * 10 + c - '0';
+            }
+            else if(c == '+'){
+                total += sign * number;
+                number = 0;
+                sign = 1;
+            }
+            else if (c == '-'){
+                total += sign * number;
+                number = 0;
+                sign = -1;
+            }
+            else if(c == '('){
+                stack.push(total);
+                stack.push(sign);
+                sign = 1;
+                total = 0;
+            }
+            else if(c == ')'){
+                total += sign* number;
+                number = 0;
+                total *= stack.top();
+                stack.pop();
+                total += stack.top();
+                stack.pop();
+            }
+        }
+        if(number != 0) total += sign * number;
+        return total;
+    }
+};
+
+
+var calculate = function(s) { //Javascript
+    let stack = []
+    let result = 0;
+    let number = 0;
+    let sign = 1;
+    for(let i = 0; i < s.length; i++){
+        let c = s[i];
+        if(c >= '0' && c <= '9') number = (number * 10) + (s[i] - '0');
+        else if(c == '+'){
+            result += sign * number;
+            number = 0;
+            sign = 1;
+        }
+        else if(c == '-'){
+            result += sign * number;
+            number = 0;
+            sign = -1;
+        }
+        else if(c == '('){
+            stack.push(result);
+            stack.push(sign);
+            sign = 1;
+            result = 0;
+        }
+        else if(c == ')'){
+            result += sign * number;
+            number = 0;
+            result *= stack.pop();
+            result += stack.pop();
+        }
+    }
+    if(number != 0) result += sign * number;
+    return result;
+};
