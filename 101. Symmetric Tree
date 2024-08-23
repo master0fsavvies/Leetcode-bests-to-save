@@ -1,0 +1,35 @@
+class Solution {//Java
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null) return true;
+        return isMirror(root.left, root.right);
+    }
+
+    private boolean isMirror(TreeNode node1, TreeNode node2){
+        if(node1 == null && node2 == null) return true;
+        if(node1 == null || node2 == null) return false;
+        return node1.val == node2.val && isMirror(node1.left, node2.right) && isMirror(node1.right, node2.left);
+    }
+}
+
+class Solution {//C++
+public:
+    bool isSymmetric(TreeNode* root) {
+        if(!root) return true;
+        return isMirror(root->left, root->right);
+    }
+    bool isMirror(TreeNode* node1, TreeNode* node2) {
+        if(!node1 && !node2) return true;
+        if(!node1 || !node2) return false;
+        return (node1->val == node2->val) && isMirror(node1->left, node2->right) && isMirror(node1->right, node2->left);
+    }
+};
+
+class Solution(object): //python
+    def isSymmetric(self, root):
+        if not root: return True
+        return self.isMirror(root.left, root.right)
+        
+    def isMirror(self, left, right):
+        if not left and not right: return True
+        if not left or not right: return False
+        return left.val == right.val and self.isMirror(left.left, right.right) and self.isMirror(left.right, right.left)
