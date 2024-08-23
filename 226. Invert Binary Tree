@@ -1,0 +1,51 @@
+class Solution {//C++
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if(root){
+            TreeNode* temp = root->left;
+            root->left = root->right;
+            root->right = temp;
+            invertTree(root->left);
+            invertTree(root->right);
+        }
+        return root;
+    }
+};
+
+class Solution {//Java
+    public TreeNode invertTree(TreeNode root) {
+        if(root != null){
+            TreeNode temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+            invertTree(root.left);
+            invertTree(root.right);
+        }
+        return root;
+    }
+}
+
+class Solution(object): //python
+    def invertTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: TreeNode
+        """
+        if root:
+            temp = root.right
+            root.right = root.left
+            root.left = temp
+            self.invertTree(root.left)
+            self.invertTree(root.right)
+        return root
+
+var invertTree = function(root) {//JavaScript
+    if(root != null){
+        var temp = root.right;
+        root.right = root.left;
+        root.left = temp;
+        invertTree(root.right);
+        invertTree(root.left);
+    }
+    return root;
+};
