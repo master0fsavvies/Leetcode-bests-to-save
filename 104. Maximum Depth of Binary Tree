@@ -1,4 +1,26 @@
-var maxDepth = function(root) {
+var maxDepth = function(root) { //javascript
     if (!root) return 0;
     return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
 };
+
+class Solution { //java
+    public int maxDepth(TreeNode root) {
+        if(root == null) return 0;
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+    }
+}
+
+class Solution { //c++
+public:
+    int maxDepth(TreeNode* root) {
+        if(!root) return 0;
+        return (max(maxDepth(root->left), maxDepth(root->right)) + 1);
+    }
+};
+
+class Solution(object): //python
+    def maxDepth(self, root):
+        if(not root):
+            return 0
+        return max(map(self.maxDepth, (root.left, root.right))) + 1
+        
