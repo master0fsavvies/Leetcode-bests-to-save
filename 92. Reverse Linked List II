@@ -1,0 +1,122 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} left
+ * @param {number} right
+ * @return {ListNode}
+ */
+var reverseBetween = function(head, left, right) { //JavaScript
+
+
+    const dummy = new ListNode(0, head);
+    let leftPoint = dummy;
+    
+    for(let i = 0; i < left - 1; i++){
+        leftPoint = leftPoint.next;
+    }
+    let cur = leftPoint.next;
+
+    for(let i = 0; i < right - left; i++){
+        let temp = cur.next;
+        cur.next = temp.next;
+        temp.next = leftPoint.next;
+        leftPoint.next = temp;
+    }
+    return dummy.next;
+};
+
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object): //Python
+    def reverseBetween(self, head, left, right):
+        """
+        :type head: Optional[ListNode]
+        :type left: int
+        :type right: int
+        :rtype: Optional[ListNode]
+        """
+        dummy = ListNode(0, head)
+        leftPoint = dummy
+
+        for i in range(left - 1):
+            leftPoint = leftPoint.next
+
+        cur = leftPoint.next
+
+        for j in range(right - left):
+            temp = cur.next
+            cur.next = temp.next
+            temp.next = leftPoint.next
+            leftPoint.next = temp
+
+        return dummy.next
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution { //C++
+public:
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+        ListNode* dummy = new ListNode(0, head);
+        ListNode* leftPoint = dummy;
+
+        for(int i = 0; i < left - 1; i++) leftPoint = leftPoint->next;
+
+        ListNode* cur = leftPoint->next;
+
+        for(int j = 0; j < right - left; j++){
+            ListNode* temp = cur->next;
+            cur->next = temp->next;
+            temp->next = leftPoint->next;
+            leftPoint->next = temp;
+        }
+
+        return dummy->next;
+    }
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution { //Java
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode leftPoint = dummy;
+
+        for(int i = 0; i < left - 1; i++) leftPoint = leftPoint.next;
+
+        ListNode cur = leftPoint.next;
+
+        for(int j = 0; j < right - left; j++){
+            ListNode temp = cur.next;
+            cur.next = temp.next;
+            temp.next = leftPoint.next;
+            leftPoint.next = temp;
+        }
+
+        return dummy.next;
+    }
+}
