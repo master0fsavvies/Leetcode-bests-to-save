@@ -8,16 +8,16 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-class Solution {//C++ iterative
+class Solution { //C++ iterative
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-        ListNode* dummy = new ListNode(0)
+        ListNode* dummy = new ListNode(0);
         dummy->next = head;
         ListNode* before = dummy;
         ListNode* after = head;
         ListNode* curr = nullptr;
         ListNode* prev = nullptr;
-        listNode* nxt = nullptr;
+        ListNode* nxt = nullptr;
         while(true){
             ListNode* cursor = after;
             for(int i = 0; i < k; i++){
@@ -33,9 +33,37 @@ public:
                 curr = nxt;
             }
             after->next = curr;
-            before-.next = prev;
+            before->next = prev;
             before = after;
             after = curr;
         }
     }
 };
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object): //Python recursive
+    def reverseKGroup(self, head, k):
+        """
+        :type head: Optional[ListNode]
+        :type k: int
+        :rtype: Optional[ListNode]
+        """
+        curr = head
+        for i in range(k):
+            if not curr: return head
+            curr = curr.next
+
+        prev = None
+        curr = head
+        for j in range(k):
+            nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
+
+        head.next = self.reverseKGroup(curr, k)
+        return prev
