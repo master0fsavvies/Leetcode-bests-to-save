@@ -1,0 +1,107 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object): #python
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: Optional[ListNode]
+        :type n: int
+        :rtype: Optional[ListNode]
+        """
+        dummy = ListNode(0, head)
+        left = dummy
+        right = head
+        while n > 0 and right:
+            right = right.next
+            n -= 1
+        
+        while right:
+            left = left.next
+            right = right.next
+
+        left.next = left.next.next
+        return dummy.next
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution { //Java
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode left = dummy;
+        ListNode right = head;
+        for(int i = 0; i < n; i++) right = right.next;
+        
+        while(right != null){
+            left = left.next;
+            right = right.next;
+        }
+
+        left.next = left.next.next;
+        return dummy.next;
+    }
+}
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ */
+var removeNthFromEnd = function(head, n) { //JavaScript
+    let dummy = new ListNode(0, head);
+    let left = dummy;
+    let right = head;
+    for(let i = 0; i < n; i++){
+        right = right.next;
+    }
+    while(right){
+        right = right.next;
+        left = left.next;
+    }
+    left.next = left.next.next;
+    return dummy.next;
+};
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution { //C++
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummy = new ListNode(0, head);
+        ListNode* left = dummy;
+        ListNode* right = head;
+        for(int i = 0; i < n; i++){
+            right = right->next;
+        }
+        while(right){
+            right = right->next;
+            left = left->next;
+        }
+        left->next = left->next->next;
+        return dummy->next;
+    }
+};
